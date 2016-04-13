@@ -40,7 +40,7 @@ TTTModel.prototype.setMark = function(index, mark) {
 };
 
 // Sets the given index to blank.
-TTTModel.prototype.setMark = function(index) {
+TTTModel.prototype.unsetMark = function(index) {
   var originalMark = this.board[index];
   if (originalMark === ' ') {
     return;
