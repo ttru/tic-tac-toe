@@ -3,17 +3,20 @@
   <head>
     <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" type="text/css" href="tictactoe.css"></link>
+    <script src="TTTModel.js"></script>
+    <script src="TTTComputerPlayer.js"></script>
+    <script src="TTTController.js"></script>
   </head>
   <body>
     <div id="container-pane">
       <h1 id="game-title" class="text-container">Tic-Tac-Toe</h1>
       <div id="control-pane">
-        <select>
+        <select id="mode-select">
           <option value="PC">Player (X) against Computer (O)</option>
           <option value="CP">Computer (X) against Player (O)</option>
           <option value="PP">Player 1 (X) vs. Player 2 (O)</option>
         </select>
-        <button>New Game</button>
+        <button id="new-game-button">New Game</button>
       </div>
       <table id="board">
         <tr>
