@@ -1,6 +1,6 @@
 var TTTModel = function() {
   // Index 0 is top-left corner, and index 8 is bottom-right.
-  this.board = ' '.repeat(9);
+  this.board = new Array(9).fill(' ');
 
   // Maintains information about counts of X's or O's in the three rows, the
   // three columns, and the two diagonals. An X in a row, column, or diagonal
@@ -25,7 +25,7 @@ TTTModel.prototype.setMark = function(index, mark) {
     return;
   }
   this.board[index] = mark;
-  var row = index / 3;
+  var row = Math.trunc(index / 3);
   var column = index % 3;
   var markCount = (mark == 'X') ? 1 : -1;
   this.rowCounts[row] += markCount;
@@ -36,7 +36,7 @@ TTTModel.prototype.setMark = function(index, mark) {
   if (row + column === 2) {
     this.slashCount += markCount;
   }
-  numMarks++;
+  this.numMarks++;
 };
 
 // Sets the given index to blank.
@@ -46,7 +46,7 @@ TTTModel.prototype.unsetMark = function(index) {
     return;
   }
   this.board[index] = ' ';
-  var row = index / 3;
+  var row = Math.trunc(index / 3);
   var column = index % 3;
   var markCount = (originalMark == 'X') ? 1 : -1;
   this.rowCounts[row] -= markCount;
@@ -57,7 +57,7 @@ TTTModel.prototype.unsetMark = function(index) {
   if (row + column === 2) {
     this.slashCount -= markCount;
   }
-  numMarks--;
+  this.numMarks--;
 };
 
 // Returns ' ' if neither X or O has won. Returns 'X' or 'O' otherwise.
@@ -97,4 +97,9 @@ TTTModel.prototype.getWinningLine = function() {
   if (Math.abs(this.slashCount) === 3) {
     return [2, 4, 6];
   }
+}
+
+// Returns whether the game is over.
+TTTModel.prototype.isGameOver = function() {
+  return this.getWinner() !== ' ' || this.numMarks === 9;
 }

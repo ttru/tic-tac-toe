@@ -13,7 +13,7 @@ TTTComputerPlayer.prototype.humanPlayedAt = null;
 var TTTPerfectPlayer = function(mark) {
   TTTComputerPlayer.call(this, mark);
 
-  var constructTree = function(board, turnMark) {
+  function constructTree(board, turnMark) {
     var node = new Object();
     node.turnMark = turnMark;
     node.children = new Array(9);
@@ -27,7 +27,7 @@ var TTTPerfectPlayer = function(mark) {
       node.oValue = 1;
       return node;
     }
-    if (board.getWinner() === ' ') {
+    if (board.numMarks === 9) {
       node.xValue = 0;
       node.oValue = 0;
       return node;
@@ -35,7 +35,7 @@ var TTTPerfectPlayer = function(mark) {
 
     for (var i = 0; i < 9; i++) {
       if (board.getMark(i) === ' ') {
-        board.setMark(i, turn);
+        board.setMark(i, turnMark);
         node.children[i] = constructTree(board, turnMark === 'X' ? 'O' : 'X');
         board.unsetMark(i);
       } else {
@@ -63,12 +63,12 @@ var TTTPerfectPlayer = function(mark) {
     if (bestIndex != -1) {
       node.choiceIndex = bestIndex;
       node.xValue = node.children[bestIndex].xValue;
-      node.xValue = node.children[bestIndex].oValue;
+      node.oValue = node.children[bestIndex].oValue;
     }
 
     return node;
   };
-  this.fullTree = constructTree(new TTTModel() ,'X');
+  this.fullTree = constructTree(new TTTModel(), 'X');
   this.current = this.fullTree;
 }
 
@@ -78,7 +78,7 @@ TTTPerfectPlayer.prototype.constructor = TTTPerfectPlayer;
 
 TTTPerfectPlayer.prototype.getComputerMove = function() {
   var move = this.current.choiceIndex;
-  this.current = this.current.children[choiceIndex];
+  this.current = this.current.children[move];
   return move;
 };
 
