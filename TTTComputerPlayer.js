@@ -9,6 +9,9 @@ TTTComputerPlayer.prototype.getComputerMove = null;
 // Communicates where the human player has played a turn.
 TTTComputerPlayer.prototype.humanPlayedAt = null;
 
+// Resets the computer player to the beginning of the game.
+TTTComputerPlayer.prototype.reset = null;
+
 
 var TTTPerfectPlayer = function(mark) {
   TTTComputerPlayer.call(this, mark);
@@ -84,4 +87,8 @@ TTTPerfectPlayer.prototype.getComputerMove = function() {
 
 TTTPerfectPlayer.prototype.humanPlayedAt = function(index) {
   this.current = this.current.children[index];
+};
+
+TTTPerfectPlayer.prototype.reset = function() {
+  this.current = this.fullTree;
 };
