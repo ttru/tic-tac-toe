@@ -8,21 +8,23 @@ var clearBoard = function() {
   for (var i = 0; i < 9; i++) {
     document.getElementById('' + i).innerHTML = '*';
   }
-  displayMessage("");
+  displayMessage('');
 }
 
 // Hooks up the game graphics and logic for the given game mode:
 // - "PC" : player goes first (as X) vs. computer
 // - "CP" : player goes second (as O) vs. computer
 // - "PP" : player 1 vs player 2
-var createGame = function(gameMode) {
+// Also accepts computerPlayers for X and O.
+var createGame = function(gameMode, computerX, computerO) {
   clearBoard();
   var boardModel = new TTTModel();
   if (gameMode === 'PP') {
     // TODO: Complete 2-player mode.
   } else {
     var humanMark = gameMode === 'PC' ? 'X' : 'O';
-    var computerPlayer = new TTTPerfectPlayer(gameMode === 'PC' ? 'O' : 'X');
+    var computerPlayer = gameMode === 'PC' ? computerO : computerX;
+    computerPlayer.reset();
     if (gameMode == 'CP') {
       var move = computerPlayer.getComputerMove();
       boardModel.setMark(move, computerPlayer.computerMark);
@@ -41,11 +43,11 @@ var createGame = function(gameMode) {
             document.getElementById('' + move).innerHTML = computerPlayer.computerMark;
           }
           if (boardModel.isGameOver()) {
-            var message = "IT'S A DRAW!"
+            var message = 'IT\'S A DRAW!'
             if (boardModel.getWinner() === humanMark) {
-              message = "YOU WON!";
+              message = 'YOU WON!';
             } else if (boardModel.getWinner() == computerPlayer.computerMark) {
-              message = "COMPUTER WON!";
+              message = 'COMPUTER WON!';
             }
             displayMessage(message);
           }
@@ -57,9 +59,16 @@ var createGame = function(gameMode) {
 
 // Initial setup of game and UI elements.
 var setUp = function() {
+  var button = document.getElementById('new-game-button');
+  button.disabled = true;
+  displayMessage('Loading...');
+  var computerX = new TTTPerfectPlayer('X');
+  var computerO = new TTTPerfectPlayer('O');
+  button.disabled = false;
+  displayMessage('');
   document.getElementById('new-game-button').onclick = function() {
     var modeSelect = document.getElementById('mode-select');
-    createGame(modeSelect.options[modeSelect.selectedIndex].value);
+    createGame(modeSelect.options[modeSelect.selectedIndex].value, computerX, computerO);
   };
 }
 
