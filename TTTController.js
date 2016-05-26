@@ -20,7 +20,26 @@ var createGame = function(gameMode, computerX, computerO) {
   clearBoard();
   var boardModel = new TTTModel();
   if (gameMode === 'PP') {
-    // TODO: Complete 2-player mode.
+    var currentMark = 'X';
+    for (var i = 0; i < 9; i++) {
+      document.getElementById('' + i).onclick = function(e) {
+        var index = Number(this.id);
+        if (boardModel.getWinner() === ' ' && boardModel.getMark(index) === ' ') {
+          boardModel.setMark(index, currentMark);
+          document.getElementById('' + index).innerHTML = currentMark;
+          currentMark = (currentMark === 'X') ? 'O' : 'X';
+          if (boardModel.isGameOver()) {
+            var message = 'IT\'S A DRAW!'
+            if (boardModel.getWinner() === 'X') {
+              message = 'PLAYER 1 WINS!';
+            } else if (boardModel.getWinner() === 'O') {
+              message = 'PLAYER 2 WINS!';
+            }
+            displayMessage(message);
+          }
+        }
+      };
+    }
   } else {
     var humanMark = gameMode === 'PC' ? 'X' : 'O';
     var computerPlayer = gameMode === 'PC' ? computerO : computerX;
@@ -33,7 +52,7 @@ var createGame = function(gameMode, computerX, computerO) {
     for (var i = 0; i < 9; i++) {
       document.getElementById('' + i).onclick = function(e) {
         var index = Number(this.id);
-        if (boardModel.getWinner() === ' ' && boardModel.getMark(index) == ' ') {
+        if (boardModel.getWinner() === ' ' && boardModel.getMark(index) === ' ') {
           computerPlayer.humanPlayedAt(index);
           boardModel.setMark(index, humanMark);
           document.getElementById('' + index).innerHTML = humanMark;
@@ -46,7 +65,7 @@ var createGame = function(gameMode, computerX, computerO) {
             var message = 'IT\'S A DRAW!'
             if (boardModel.getWinner() === humanMark) {
               message = 'YOU WON!';
-            } else if (boardModel.getWinner() == computerPlayer.computerMark) {
+            } else if (boardModel.getWinner() === computerPlayer.computerMark) {
               message = 'COMPUTER WON!';
             }
             displayMessage(message);
