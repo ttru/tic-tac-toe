@@ -6,7 +6,7 @@ var displayMessage = function(message) {
 // Clears the board of marks.
 var clearBoard = function() {
   for (var i = 0; i < 9; i++) {
-    document.getElementById('' + i).innerHTML = '*';
+    document.getElementById('' + i).innerHTML = '&nbsp;';
   }
   displayMessage('');
 }
@@ -85,10 +85,11 @@ var setUp = function() {
   var computerO = new TTTPerfectPlayer('O');
   button.disabled = false;
   displayMessage('');
-  document.getElementById('new-game-button').onclick = function() {
+  button.onclick = function() {
     var modeSelect = document.getElementById('mode-select');
     createGame(modeSelect.options[modeSelect.selectedIndex].value, computerX, computerO);
   };
+  button.click();
 }
 
 window.onload = setUp;
