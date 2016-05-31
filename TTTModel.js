@@ -83,7 +83,7 @@ TTTModel.prototype.getWinner = function() {
 TTTModel.prototype.getWinningLine = function() {
   for (var i = 0; i < 3; i++) {
     if (Math.abs(this.rowCounts[i]) === 3) {
-      return [i, i + 1, i + 2];
+      return [3 * i, 3 * i + 1, 3 * i + 2];
     }
   }
   for (var i = 0; i < 3; i++) {

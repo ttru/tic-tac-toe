@@ -3,11 +3,6 @@
   margin: 0px;
 }
 
-body {
-  background-color: #a3a9ff;
-  height: 100vh;
-}
-
 #game-title {
   padding: 20px;
   font-size: 54px;
@@ -37,12 +32,60 @@ body {
 }
 
 td {
-  font-family: monospace;
+  font-family: "Lucida Console", Monaco, monospace;
   font-size: 72px;
   padding: 10px;
   border: thick solid black;
 }
 
-#0 {
-  background-color: black;
+#\30 {
+  border-left: none;
+  border-top: none;
+}
+
+#\31 {
+  border-top: none;
+}
+
+#\32 {
+  border-top: none;
+  border-right: none;
+}
+
+#\33 {
+  border-left: none;
+}
+
+#\35 {
+  border-right: none;
+}
+
+#\36 {
+  border-bottom: none;
+  border-left: none;
+}
+
+#\37 {
+  border-bottom: none;
+}
+
+#\38 {
+  border-bottom: none;
+  border-right: none;
+}
+
+.x-mark, .x-line {
+  color: blue;
+}
+
+.o-mark, .o-line {
+  color: red;
+}
+
+.x-line {
+  background-color: #aaaaff;
+}
+
+.o-line {
+  background-color: #ffaaaa;
 }

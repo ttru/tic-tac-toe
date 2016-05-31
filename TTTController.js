@@ -6,9 +6,30 @@ var displayMessage = function(message) {
 // Clears the board of marks.
 var clearBoard = function() {
   for (var i = 0; i < 9; i++) {
-    document.getElementById('' + i).innerHTML = '&nbsp;';
+    var cell = document.getElementById('' + i)
+    cell.className = 'blank-mark';
+    cell.innerHTML = '&nbsp;';
   }
   displayMessage('');
+}
+
+// Marks a cell on the board at the given index.
+var markBoard = function(index, mark, boardModel) {
+  boardModel.setMark(index, mark);
+  var cell = document.getElementById('' + index)
+  cell.className = (mark === 'X') ? 'x-mark' : 'o-mark';
+  cell.innerHTML = mark;
+}
+
+//
+var markLine = function(boardModel) {
+  if (boardModel.getWinner() === ' ') return;
+  var lineClass = (boardModel.getWinner() === 'X') ? 'x-line' : 'o-line';
+  var lineIndices = boardModel.getWinningLine();
+  for (var i = 0; i < 3; i++) {
+    var index = lineIndices[i];
+    document.getElementById('' + index).className = lineClass;
+  }
 }
 
 // Hooks up the game graphics and logic for the given game mode:
@@ -25,10 +46,10 @@ var createGame = function(gameMode, computerX, computerO) {
       document.getElementById('' + i).onclick = function(e) {
         var index = Number(this.id);
         if (boardModel.getWinner() === ' ' && boardModel.getMark(index) === ' ') {
-          boardModel.setMark(index, currentMark);
-          document.getElementById('' + index).innerHTML = currentMark;
+          markBoard(index, currentMark, boardModel);
           currentMark = (currentMark === 'X') ? 'O' : 'X';
           if (boardModel.isGameOver()) {
+            markLine(boardModel);
             var message = 'IT\'S A DRAW!'
             if (boardModel.getWinner() === 'X') {
               message = 'PLAYER 1 WINS!';
@@ -46,22 +67,20 @@ var createGame = function(gameMode, computerX, computerO) {
     computerPlayer.reset();
     if (gameMode == 'CP') {
       var move = computerPlayer.getComputerMove();
-      boardModel.setMark(move, computerPlayer.computerMark);
-      document.getElementById('' + move).innerHTML = computerPlayer.computerMark;
+      markBoard(move, computerPlayer.computerMark, boardModel);
     }
     for (var i = 0; i < 9; i++) {
       document.getElementById('' + i).onclick = function(e) {
         var index = Number(this.id);
         if (boardModel.getWinner() === ' ' && boardModel.getMark(index) === ' ') {
           computerPlayer.humanPlayedAt(index);
-          boardModel.setMark(index, humanMark);
-          document.getElementById('' + index).innerHTML = humanMark;
+          markBoard(index, humanMark, boardModel);
           if (!boardModel.isGameOver()) {
             var move = computerPlayer.getComputerMove();
-            boardModel.setMark(move, computerPlayer.computerMark);
-            document.getElementById('' + move).innerHTML = computerPlayer.computerMark;
+            markBoard(move, computerPlayer.computerMark, boardModel);
           }
           if (boardModel.isGameOver()) {
+            markLine(boardModel);
             var message = 'IT\'S A DRAW!'
             if (boardModel.getWinner() === humanMark) {
               message = 'YOU WON!';
