@@ -108,6 +108,11 @@ var setUp = function() {
     var modeSelect = document.getElementById('mode-select');
     createGame(modeSelect.options[modeSelect.selectedIndex].value, computerX, computerO);
   };
+  var select = document.getElementById('mode-select');
+  select.onchange = function() {
+    var modeSelect = document.getElementById('mode-select');
+    createGame(modeSelect.options[modeSelect.selectedIndex].value, computerX, computerO);
+  }
   button.click();
 }
 
