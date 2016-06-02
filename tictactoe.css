@@ -1,0 +1,91 @@
+* {
+  text-align: center;
+  margin: 0px;
+}
+
+#game-title {
+  padding: 20px;
+  font-size: 54px;
+}
+
+.text-container {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#container-pane {
+  background-color: white;
+  width: 100%;
+  height: 80vh;
+  margin: auto;
+  border-width: 0 thin;
+  border-style: solid;
+  border-color: #aaaaaa;
+}
+
+#board {
+  margin: 30px auto;
+  border-collapse: collapse;
+}
+
+#message {
+  font-size: 24px;
+}
+
+td {
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 72px;
+  padding: 10px;
+  border: thick solid black;
+}
+
+#\30 {
+  border-left: none;
+  border-top: none;
+}
+
+#\31 {
+  border-top: none;
+}
+
+#\32 {
+  border-top: none;
+  border-right: none;
+}
+
+#\33 {
+  border-left: none;
+}
+
+#\35 {
+  border-right: none;
+}
+
+#\36 {
+  border-bottom: none;
+  border-left: none;
+}
+
+#\37 {
+  border-bottom: none;
+}
+
+#\38 {
+  border-bottom: none;
+  border-right: none;
+}
+
+.x-mark, .x-line {
+  color: blue;
+}
+
+.o-mark, .o-line {
+  color: red;
+}
+
+.x-line {
+  background-color: #aaaaff;
+}
+
+.o-line {
+  background-color: #ffaaaa;
+}

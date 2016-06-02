@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" type="text/css" href="tictactoe.css"></link>
+    <script src="TTTModel.js"></script>
+    <script src="TTTComputerPlayer.js"></script>
+    <script src="TTTController.js"></script>
+  </head>
+  <body>
+    <div id="container-pane">
+      <h1 id="game-title" class="text-container">Tic-Tac-Toe</h1>
+      <div id="control-pane">
+        <select id="mode-select">
+          <option value="PC">Player (X) vs. Computer (O)</option>
+          <option value="CP">Computer (X) vs. Player (O)</option>
+          <option value="PP">Player 1 (X) vs. Player 2 (O)</option>
+        </select>
+        <button id="new-game-button">New Game</button>
+      </div>
+      <table id="board">
+        <tr>
+          <td id="0" class="blank-mark"></td>
+          <td id="1" class="blank-mark"></td>
+          <td id="2" class="blank-mark"></td>
+        </tr>
+        <tr>
+          <td id="3" class="blank-mark"></td>
+          <td id="4" class="blank-mark"></td>
+          <td id="5" class="blank-mark"></td>
+        </tr>
+        <tr>
+          <td id="6" class="blank-mark"></td>
+          <td id="7" class="blank-mark"></td>
+          <td id="8" class="blank-mark"></td>
+        </tr>
+      </table>
+      <div id="message" class="text-container"></div>
+    </div>
+  </body>
+</html>
